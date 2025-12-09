@@ -41,17 +41,19 @@ const part2 = (rawInput: string) => {
 
 		// going negative over 0
 		if (pointer < 0) {
+			if (Math.abs(pointer) != Math.abs(amount)) {
+				zeroCounter++;
+			}
 			pointer = 100 + pointer;
-			zeroCounter += 1;
 		} 
 		// going positive over 100 
 		else if (pointer > 99) {
 			pointer = pointer % 100;
-			zeroCounter += 1;
+			zeroCounter++;
 		} 
 		// staying on 0
 		else if (pointer == 0) {
-			zeroCounter += 1;
+			zeroCounter++;
 		}
 		// console.log(step, pointer, zeroCounter)
 	}
@@ -70,13 +72,24 @@ run({
   },
   part2: {
     tests: [
-      // {
-      //   input: ``,
-      //   expected: "",
-      // },
+      {
+        input: `
+R50
+L89
+R6
+R23
+		`,
+        expected: 28,
+      },
     ],
     solution: part2,
   },
   trimTestInputs: true,
   onlyTests: false,
 });
+
+// L500
+// R550 0 28
+// L789 11 28
+// R906 17 28
+// R123 40 28
